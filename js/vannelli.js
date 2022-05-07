@@ -7,9 +7,6 @@
 location.hostname === "localhost" || location.hostname === "127.0.0.1" ?
     baseURL = window.location.origin : baseURL = window.location.origin + '/vannelli';
 
-// Initialize the DOM Parser
-var parser = new DOMParser();
-
 // Document Data
 var docData = {
     title: document.title,
@@ -18,23 +15,23 @@ var docData = {
 };
 
 const template = {
+    parser: new DOMParser(),
     _copyPasteTemplate(templateID, targetID, _source) {
         // get template ID from source
         const _getTemplateID = _source.getElementById(templateID);
         // clone template ID from source
         const _cloneTemplate = _getTemplateID.content.cloneNode(true);
-        // append template to target selector
+        // get target ID from page
         const _targetID = document.getElementById(targetID);
+        // append template to target ID
         _targetID.appendChild(_cloneTemplate);
         // delete original template from document
         _getTemplateID.remove();
     },
     _parseSource(source, templateID, targetID, mimeType) {
-        if (mimeType === undefined) {
-            mimeType = 'text/html'
-        }
+        if (mimeType === undefined) mimeType = 'text/html';
         // get source and parse it
-        const _source = parser.parseFromString(source, mimeType);
+        const _source = this.parser.parseFromString(source, mimeType);
         this._copyPasteTemplate(templateID, targetID, _source);
     },
     getTemplate(templateID, targetID, _source = document) {
@@ -51,7 +48,7 @@ const template = {
         new Promise((resolve, reject) => {
                 // check if source is string
                 typeof source === 'string' ?
-                    resolve() : reject(err = 'Error: Template source is not a String');
+                    resolve() : reject(err = 'Error: Source is not a String');
             })
             .then(() => this._parseSource(source, templateID, targetID, mimeType))
             .catch(err => console.error(err))
@@ -65,7 +62,8 @@ const template = {
             .then(text => this._parseSource(text, templateID, targetID, mimeType))
             .catch(err => console.error(err))
             .finally(() => {
-                // add code
+                // once the footer is loaded start toggles
+                if (templateID === 'footerTemplate') toggle();
             })
 
         return this;
@@ -102,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         </footer>
     </template>
-    `, 'layoutTemplate', 'root')
+        `, 'layoutTemplate', 'root')
         .getTemplate('asideTemplate', 'content')
         .getTemplate('contentTemplate', 'content')
         .fetchSource('/templates/main-min.html', 'navTemplate', 'header')
