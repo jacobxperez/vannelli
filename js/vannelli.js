@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Check for subtitle then added to layout
     docData.subTitle === null ?
         subTitle = '' :
-        subTitle = `<h2 data-text="h5">${docData.subTitle}</h2>`;
+        subTitle = `<h2>${docData.subTitle}</h2>`;
 
     // 1. generate page layout from string
     // 2. move secondary content to layout
