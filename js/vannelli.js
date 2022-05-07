@@ -83,21 +83,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // 5. fetch footer
     const layout = template.fromString(`
     <template id="layoutTemplate">
-        <header id="header" data-section="header">
-            <div id="headerContent" data-container="fit">
-                <h1>${docData.title}</h1>
-                ${subTitle}
-            </div>
+        <header id="header">
+            <h1>${docData.title}</h1>
+            ${subTitle}
         </header>
 
-        <main id="main" data-section="main">
-            <div id="content" data-container="fit" data-grid="main">
-            </div>
+        <main id="main">
         </main>
 
-        <footer id="footer" data-section="footer">
-            <div id="footerContent" data-container="fit">
-            </div>
+        <footer id="footer">
         </footer>
     </template>
         `, 'layoutTemplate', 'root')
