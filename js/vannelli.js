@@ -61,10 +61,6 @@ const template = {
             .then(response => response.text())
             .then(text => this._parseSource(text, templateID, targetID, mimeType))
             .catch(err => console.error(err))
-            .finally(() => {
-                // once the footer is loaded start toggles
-                if (templateID === 'footerTemplate') toggle();
-            })
 
         return this;
     },
