@@ -8,8 +8,7 @@
     margin: 0;
     padding: 0;
     border: 0 none;
-    font-size: inherit;
-    font-family: inherit;
+    font: inherit;
     line-height: inherit;
     text-align: inherit;
     vertical-align: baseline;
