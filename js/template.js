@@ -1,13 +1,13 @@
 /* @license
- * Jacob Perez <https://jacobxperez.github.io/vannelli/>
+ * Vannelli <https://jacobxperez.github.io/vannelli/>
  * Copyright (C) 2022 Jacob Perez <jacobxperez@gmx.com>
  * Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0
 -----------------------------------------------------------------------------*/
 import {aside} from './partials/aside';
-import {Template} from './modules/template';
+import {Vannelli} from './modules/vannelli';
 
-const page = new Template();
+const template = new Vannelli();
 
 let title;
 meta.title === null
@@ -19,8 +19,8 @@ meta.subtitle === null
     ? (subtitle = '')
     : (subtitle = `<h2 data-text="h5">${meta.subtitle}</h2>`);
 
-// page header
-page.header = `
+// template header
+template.header = `
     <div id="header" data-wrapper="fit">
         ${title}
         ${subtitle}
@@ -28,19 +28,19 @@ page.header = `
 
 // check for layout type
 if (meta.layout === null) {
-    page.main = `
+    template.main = `
     <div data-wrapper="fit" data-grid="main">
         <aside id="aside">${aside}</aside>
         <article id="content"></article>
     </div>`;
 } else if (meta.layout === 'post') {
-    page.main = `
+    template.main = `
     <div data-wrapper="fit" data-grid="main">
         <aside id="aside"></aside>
         <article id="content"></article>
     </div>`;
 } else if (meta.layout === 'full') {
-    page.main = `
+    template.main = `
     <div id="content" data-wrapper="fit" data-grid="main">
     </div>`;
 }
@@ -53,15 +53,15 @@ location.hostname === 'localhost' || location.hostname === '127.0.0.1'
           window.location.origin + '/blog/templates/index.6e7a5d68.html');
 
 // create main layout
-page.layout = `
+template.layout = `
     <nav data-navbar="top">
         <div id="nav"></div>
     </nav>
     <header data-section="header">
-        ${page.header}
+        ${template.header}
     </header>
     <main data-section="main">
-        ${page.main}
+        ${template.main}
     </main>
     <footer data-section="footer">
         <div id="footer" data-wrapper="fit">
@@ -69,7 +69,8 @@ page.layout = `
     </footer>`;
 
 // parse everything together
-page.fromString(page.layout, 'root')
+template
+    .fromString(template.layout, 'root')
     .getTemplate('asideTemplate', 'aside')
     .getTemplate('contentTemplate', 'content')
     .fetchTemplate(templateURL, 'nav')
