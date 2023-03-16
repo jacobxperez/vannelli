@@ -8,7 +8,8 @@ Vannelli is a client side template engine
 
 ## Examples
 
-This sites are implementing vannelli templates
+This sites are implementing vannelli templates, it uses template literals and
+the html template element to render dynamic web pages
 
 - [Rams](https://jacobxperez.github.io/rams/):  Class less css design system framework.
 - [Jacob Perez](https://jacobxperez.github.io/blog/): I am a front-end web developer and designer.
