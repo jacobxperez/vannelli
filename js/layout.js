@@ -72,5 +72,5 @@ page.layout = `
 page.fromString(page.layout, 'root')
     .getTemplate('asideTemplate', 'aside')
     .getTemplate('contentTemplate', 'content')
-    .fetchTemplate(templateURL, 'nav', toggle)
+    .fetchTemplate(templateURL, 'nav')
     .fetchTemplate(templateURL, 'footer');
