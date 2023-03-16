@@ -4,7 +4,7 @@ Vanilla Javascript Template Engine
 
 ## LICENSE
 
-Copyright (C) 2022 [Jacob Perez](https://github.com/jacobxperez)
+Copyright (C) 2023 [Jacob Perez](https://github.com/jacobxperez)
 
 ### Content
 
