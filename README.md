@@ -4,8 +4,8 @@ Vanilla Javascript Template Engine
 
 ## About
 
-Vannelli is a client side template engine, it uses template literals and the
-html template element to render dynamic web pages.
+Vannelli is a client side template engine that it uses JavaScript template literals
+and html template elements to render dynamic web pages.
 
 ## Examples
 
