@@ -9,7 +9,7 @@ html template elements, and the fetch api to render dynamic web pages.
 
 ## Examples
 
-This sites are implementing vannelli templates.
+This sites are implementing vannelli as their template engine.
 
 - [Rams](https://jacobxperez.github.io/rams/):  Class less css design system framework.
 - [Jacob Perez](https://jacobxperez.github.io/blog/): I am a front-end web developer and designer.
