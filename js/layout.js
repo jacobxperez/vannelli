@@ -1,55 +1,46 @@
 /* @license
- * Vannelli <https://jacobxperez.github.io/vannelli/>
+ * Jacob Perez <https://jacobxperez.github.io/blog/>
  * Copyright (C) 2023 Jacob Perez <jacobxperez@gmx.com>
  * Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0
 -----------------------------------------------------------------------------*/
-import {aside} from './partials/aside';
-import {Vannelli} from './modules/vannelli';
+import {sidebar} from './sidebar.js';
+import {toggle} from './toggle';
 
-const template = new Vannelli();
+if (template.meta.title === '') {
+    template.meta.title = `<h1>Jacob Perez</h1>`;
+} else {
+    template.meta.title = `<h1>${template.meta.title}</h1>`;
+}
 
-let title;
-meta.title === null
-    ? (title = `<h1>Jacob Perez</h1>`)
-    : (title = `<h1>${meta.title}</h1>`);
-
-let subtitle;
-meta.subtitle === null
-    ? (subtitle = '')
-    : (subtitle = `<h2 data-text="h5">${meta.subtitle}</h2>`);
+if (template.meta.subtitle !== '') {
+    template.meta.subtitle = `<h2 data-text="h5">${template.meta.subtitle}</h2>`;
+}
 
 // template header
 template.header = `
     <div id="header" data-wrapper="fit">
-        ${title}
-        ${subtitle}
+        ${template.meta.title}
+        ${template.meta.subtitle}
     </div>`;
 
 // check for layout type
-if (meta.layout === null) {
-    template.main = `
-    <div data-wrapper="fit" data-grid="main">
-        <aside id="aside">${aside}</aside>
-        <article id="content"></article>
-    </div>`;
-} else if (meta.layout === 'post') {
-    template.main = `
+template.main = `
     <div data-wrapper="fit" data-grid="main">
         <aside id="aside"></aside>
         <article id="content"></article>
     </div>`;
-} else if (meta.layout === 'full') {
+if (template.type === 'full') {
     template.main = `
     <div id="content" data-wrapper="fit" data-grid="main">
     </div>`;
 }
 
-// check and sets template url for localhost or for public url
-let templateURL;
+// check and set template url for localhost or for public url
 location.hostname === 'localhost' || location.hostname === '127.0.0.1'
-    ? (templateURL = window.location.origin + '/templates/index.2a86ff1c.html')
-    : (templateURL =
+    ? (template.fetchURL =
+          window.location.origin + '/templates/index.2a86ff1c.html')
+    : (template.fetchURL =
           window.location.origin + '/blog/templates/index.6e7a5d68.html');
 
 // create main layout
@@ -70,8 +61,7 @@ template.layout = `
 
 // parse everything together
 template
-    .fromString(template.layout, 'root')
-    .getTemplate('asideTemplate', 'aside')
-    .getTemplate('contentTemplate', 'content')
-    .fetchTemplate(templateURL, 'nav')
-    .fetchTemplate(templateURL, 'footer');
+    .fromString(template.layout, 'body')
+    .getAndSetTemplate('template', '#content', sidebar)
+    .fetchTemplate(template.fetchURL, '#nav', toggle)
+    .fetchTemplate(template.fetchURL, '#footer');
